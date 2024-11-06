@@ -1,44 +1,40 @@
-<form action="https://www.w3schools.com/action_page.php" method="post">
-    <fieldset>
-        <legend>Datos personales</legend>
-        <label for="nombre">Nombre y apellidos: </label>
-        <input name="nombre" id="nombre" type="text"><br>
-        <label for="socio">Socio:</label>
-        <select name="socio" id="socio">
-            <!--Etiqueta option-->
-            <option value="value1">Sí<option>
-            <option value="value2" selected>No<option>
-        </select><br><br>
-        <label>Edad: </label>
-        <input name="edad" type="checkbox" value="20-39"> 20-39
-        <input name="edad" type="checkbox" value="40-59"> 40-59
-        <input name="edad" type="checkbox" value="60-79"> 60-79<br><br>
-        <label for="email">Email: </label>
-        <input id="email" name="email" type="email"><br><br>
-        <label for="estudios">Estudios: </label>
-        <select name="estudios" id="estudios">
-            <optgroup label="Estudios Universitarios">
-                <option>Doctorado</option>
-                <option>Máster</option>
-                <option>Grado</option>
-            </optgroup>
-            <optgroup label="Ciclo Formativo">
-                <option>Grado Superior</option>
-                <option>Grado Medio</option>
-            </optgroup>
-        </select><br><br>
-        <label for="navegador">Elige tu navegador favorito: </label>
-        <input name="navegador" id="navegador" list="browsers">
-        <datalist name="browsers" id="browsers">
-            <option value="Chrome">
-            <option value="Firefox">
-            <option value="Internet Explorer">
-            <option value="Opera">
-            <option value="Safari">
-            <option value="Microsoft Edge">
-        </datalist><br><br>
-        <label for="mensaje">Escribe tu mensaje: </label>
-        <textarea rows="10" cols="50" placeholder="Mensaje" id="mensaje" name="mensaje" ></textarea>
-    </fieldset>
-    <input type="submit" name="enviar" value="Enviar">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gatos</title>
+</head>
+<body>
+	<h1>Gatos Siameses</h1>
+	<p> los siameses tienden a asociar el cepillado al afecto y disfrutarán del momento del aseo. Pese a su elegante aspecto, el siamés puede ser un gato muy mimoso. Es extremadamente cariñoso y dormirá junto a su propietario.</p>
+	<p>¿Cuánto vive? Con una tenencia y alimentación acordes a la especie, los gatos siameses pueden vivir entre quince y veinte años. Esta es una edad impresionante para un gato de raza.</p>
+
+	<table border="2">
+        <tr>
+            <th> Nombre </th>
+            <th> Raza </th>            
+            <th><a href="https://es.wikipedia.org/wiki/Felis_silvestris_catus"> Enlace </th>
+        </tr>
+        <tr>
+            <td>Pepe</td>
+            <td>Naranja</td>            
+            <td><a href="https://www.lavanguardia.com/mascotas/gatos/20230818/9161959/curiosidades-gatos-naranjas-pvlv.html">Info</td>
+        </tr>
+        <tr>
+            <td>Oreo</td>
+            <td>Negro</td>            
+            <td><a href="https://es.wikipedia.org/wiki/Gato_negro">Info</td>
+        </tr>
+        <tr>
+            <td>Pinza</td>
+            <td>Blanco</td>            
+            <td><a href="https://www.rover.com/es/blog/gatos-blancos/">Info</td>
+        </tr>
+    </table>
+
+    <li><a href="../index.html.html">Inicio</a></li>
+
+
+</body>
+</html>
