@@ -31,6 +31,7 @@
     background-position:center , top ;
     border-radius: 10px;
     display: inline-block;
+    
 
 }
 #id_div3{
@@ -67,3 +68,49 @@
     background-position: left ;
     display: inline-block;
 }
+#id_cuadrado2_1{
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(100, 214, 138);
+    background-position: right ;
+
+}
+#id_cuadrado2_2{
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(214, 187, 100);
+    background-position: center ;
+
+}
+#id_cuadrado_3{
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(214, 100, 134);
+    background-position: left ;
+
+}
+#id_cuadrado3_1{
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-position: right ;
+
+}
+#id_cuadrado3_2{
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-position: center ;
+
+}
+#id_cuadrado3_3{
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-position: left ;
+
+}
+
