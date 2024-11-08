@@ -13,13 +13,19 @@
 #id_parrafo4{
     font-weight:bold;
     text-shadow:-4px 3px 5px green;
+    border-bottom: 2px;
+
 }
+#id_parrafos{
+    border-bottom: 2px;
+    border-color: black;
+}
+
 #id_div1{
     margin: 10px;
     width: 400px;
     height: 200px;
-    background-color: darkseagreen;
-    background-position: left , top;    
+    background-color: darkseagreen;   
     border-radius: 10px;
     display: inline-block;
 }
@@ -28,7 +34,6 @@
     width: 400px;
     height: 200px;
     background-color: rgb(94, 211, 172);
-    background-position:center , top ;
     border-radius: 10px;
     display: inline-block;
     
@@ -38,79 +43,47 @@
     margin: 10px;
     width: 400px;
     height: 200px;
-    background-color: rgb(172, 100, 214);
-    background-position: right , top ; 
     border-radius: 10px;
     display: inline-block;
+    background-color: rgb(172, 100, 214);
+   
        
 }
-#id_cuadrado1{
+.clase1{
     margin: 5px;
     width: 100px;
-    height: 30px;
+    height: 30px; 
     background-color: rgb(100, 214, 138);
-    background-position: right ;
+}
+.clase2{
+      margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(214, 187, 100);
+}
+.clase3{
+margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(214, 100, 134);
+
+}
+.clase4{
+    margin: 5px; 
+    display: inline-block; 
+}
+#id_cuadrado1{
+
     display: inline-block;
 }
 #id_cuadrado2{
-    margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-color: rgb(214, 187, 100);
-    background-position: center ;
     display: inline-block;
+
 }
 #id_cuadrado3{
-    margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-color: rgb(214, 100, 134);
-    background-position: left ;
     display: inline-block;
 }
-#id_cuadrado2_1{
-    margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-color: rgb(100, 214, 138);
-    background-position: right ;
 
-}
-#id_cuadrado2_2{
-    margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-color: rgb(214, 187, 100);
-    background-position: center ;
+    
 
-}
-#id_cuadrado_3{
-    margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-color: rgb(214, 100, 134);
-    background-position: left ;
-
-}
-#id_cuadrado3_1{
-    margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-position: right ;
-
-}
-#id_cuadrado3_2{
-    margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-position: center ;
-
-}
-#id_cuadrado3_3{
-    margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-position: left ;
-
-}
 
