@@ -1,0 +1,25 @@
+
+.div{
+    width: 700px;
+    height: 700px;
+    
+    background-image: url("../img/img.png");   
+    background-size:50%;
+    margin: 10px;
+}
+#id_div1{
+   background-repeat: no-repeat; 
+   background-position: center center;
+   border: 10px solid rgb(255, 0, 0); 
+
+}
+#id_div2{
+    background-repeat: repeat-x;
+    background-position: bottom;
+    border: 10px solid rgb(162, 0, 255); 
+}
+#id_div3{
+    background-repeat: repeat-y;
+    background-position: right;
+    border: 10px solid rgb(0, 255, 145); 
+}
