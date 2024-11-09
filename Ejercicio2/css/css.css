@@ -1,3 +1,30 @@
+.clase1{
+    margin: 5px;
+    width: 100px;
+    height: 30px; 
+    background-color: rgb(100, 214, 138);
+    
+}
+.clase2{
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(214, 187, 100);
+}
+.clase3{
+    margin: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(214, 100, 134);
+
+}
+.clase4{
+    margin: 5px; 
+    display: inline-block; 
+   
+}
+
+
 #id_parrafo1{
     text-align:right;
     font-style:italic;
@@ -13,14 +40,11 @@
 #id_parrafo4{
     font-weight:bold;
     text-shadow:-4px 3px 5px green;
-    border-bottom: 2px;
-
+    border-bottom: 2px solid black;
 }
-#id_parrafos{
-    border-bottom: 2px;
-    border-color: black;
+#id_divs{
+    display: flex;
 }
-
 #id_div1{
     margin: 10px;
     width: 400px;
@@ -36,8 +60,6 @@
     background-color: rgb(94, 211, 172);
     border-radius: 10px;
     display: inline-block;
-    
-
 }
 #id_div3{
     margin: 10px;
@@ -45,33 +67,9 @@
     height: 200px;
     border-radius: 10px;
     display: inline-block;
-    background-color: rgb(172, 100, 214);
-   
-       
+    background-color: rgb(172, 100, 214);     
 }
-.clase1{
-    margin: 5px;
-    width: 100px;
-    height: 30px; 
-    background-color: rgb(100, 214, 138);
-}
-.clase2{
-      margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-color: rgb(214, 187, 100);
-}
-.clase3{
-margin: 5px;
-    width: 100px;
-    height: 30px;
-    background-color: rgb(214, 100, 134);
 
-}
-.clase4{
-    margin: 5px; 
-    display: inline-block; 
-}
 #id_cuadrado1{
 
     display: inline-block;
