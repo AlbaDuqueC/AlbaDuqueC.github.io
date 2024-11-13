@@ -1,0 +1,29 @@
+#id_t1{
+    border: 1px solid black;
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+}
+.tabla{
+    border: 1px solid black;
+    width: 30%;
+    text-align: center;
+    padding: 10px;   
+}
+#id_div{
+    border: 1px solid black;
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+}
+.tabla2{
+    border: 1px solid black;
+    width: 30%;
+    text-align: center;
+    padding: 10px; 
+     display: inline-block; 
+     margin: 1px;
+
+}
