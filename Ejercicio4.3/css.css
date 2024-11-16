@@ -5,29 +5,35 @@
 }
 #titulo{
     font-family: Helvetica;
+    text-align: center;
 }
 #header{
     background-color: #007bff;
-    border-radius: 10%;
+    border-radius: 20%;
     border: #007bff;
-    margin: 10px;
+    margin: 20px;
+    border: 2px solid blue;
+    text-align: center;
 
 }
 
 .enlace{
     color: white;
     text-decoration: none;
-    margin: 50px;
-    transition:all;
+    padding: 2%;
+    margin: 100px;
+    transition: color 1.5s ease, font-size 0.3s ease-in-out;
    
     
 } 
 .enlace:hover{
         color: blue;
+        font-size: 23px;
 }
 #contenido{
     padding: 50px;
     margin: 3%;
+    text-align: center;
     
     
 }
@@ -57,6 +63,7 @@
 }
 .pagina1{
     margin: 5%;
+    text-align: center;
 }
 .pagina1 img{
     margin: 5px;
@@ -67,4 +74,9 @@
 }
 #botones{
     border-radius: 40%;
+    border-color: #007bff;
+    background-color: rgb(126, 255, 255);
+}
+.pagina3{
+    text-align: center;
 }
