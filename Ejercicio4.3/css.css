@@ -1,5 +1,7 @@
 #body{
     background-color:  #B5F4FF;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 20px;
 }
 #titulo{
     font-family: Helvetica;
@@ -8,11 +10,14 @@
     background-color: #007bff;
     border-radius: 10%;
     border: #007bff;
+    margin: 10px;
 
 }
+
 .enlace{
     color: white;
     text-decoration: none;
+    margin: 50px;
    
     
 } 
@@ -55,4 +60,10 @@
 .pagina1 img{
     margin: 5px;
     height: 400px;
+}
+.pagina2 ul{
+    list-style-type:circle;
+}
+button{
+    background-color: #007bff;
 }
