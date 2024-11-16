@@ -64,6 +64,6 @@
 .pagina2 ul{
     list-style-type:circle;
 }
-button{
-    background-color: #007bff;
+#botones{
+    border-radius: 40%;
 }
