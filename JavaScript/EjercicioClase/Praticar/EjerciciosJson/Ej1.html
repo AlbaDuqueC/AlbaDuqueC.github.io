@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        let info={nombre: "Pepe", apellido: "Garcia", edad: "24", ciudad: "Sevilla"}
+
+        json_s= serializar (info)
+        console.log(json_s)
+        info_recuperado= deserializar(json_s)
+        function serializar (obj){
+
+            return JSON.stringify(obj)
+
+        }
+
+        function deserializar(info){
+
+            return JSON.parse(info)
+
+        }
+
+    </script>
+</body>
+</html>

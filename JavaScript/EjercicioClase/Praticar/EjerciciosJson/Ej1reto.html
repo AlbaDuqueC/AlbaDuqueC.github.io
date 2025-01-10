@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            
+            <td>Nombre</td>
+            <td>Apellido</td>
+            <td>Edad</td>
+            <td>Ciudad</td>
+        
+        </thead>
+        <tbody>
+
+            <td id="nombre"></td>
+            <td id="apellido"></td>
+            <td id="edad"></td>
+            <td id="ciudad"></td>
+
+    </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    
+    <script type="text/javascript">
+
+        let info={nombre: "Pepe", apellido: "Garcia", edad: "24", ciudad: "Sevilla"}
+
+        json_s= serializar (info)
+        console.log(json_s)
+        info_recuperado= deserializar(json_s)
+        function serializar (obj){
+
+            return JSON.stringify(obj)
+
+        }
+
+        function deserializar(info){
+
+            return JSON.parse(info)
+
+        }
+        $("#nombre").text(info_recuperado.nombre);
+
+    </script>
+</body>
+</html>
