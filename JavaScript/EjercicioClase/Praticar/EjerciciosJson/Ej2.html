@@ -49,10 +49,10 @@
             return JSON.parse(info)
 
         }
-        $("#nombre").text(info_recuperado.nombres);
-        $("#apellido").text(info_recuperado.apellidos);
-        $("#edad").text(info_recuperado.edades);
-        $("#ciudad").text(info_recuperado.ciudades);
+        $("#nombre").text(info_recuperado.nombres).val();
+        $("#apellido").text(info_recuperado.apellidos).val();
+        $("#edad").text(info_recuperado.edades).val();
+        $("#ciudad").text(info_recuperado.ciudades).val();
 
         let table=+ "<tbody>"
             +"<td>"+ info_recuperado.nombres + "</td>" 
@@ -61,6 +61,7 @@
             +"<td>"+ info_recuperado.ciudades + "</td>" 
             +"</tbody>"
 
+        
         
 
     </script>
