@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="nombres">
+    <input type="text" id="apellidos">
+    <input type="text" id="edades">
+    <input type="text" id="ciudades">
+
+    <button id="button">Enviar</button>
+    
+    <table>
+
+        <thead>
+            <td>Nombre</td>
+            <td>Apellido</td>
+            <td>Edad</td>
+            <td>Ciudad</td>
+        </thead>
+        
+
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    
+    <script type="text/javascript">
+
+        
+
+        let info={nombre: nombres, apellido: apellidos, edad: edades, ciudad: ciudades}
+
+        json_s= serializar (info)
+        console.log(json_s)
+        info_recuperado= deserializar(json_s)
+        function serializar (obj){
+
+            return JSON.stringify(obj)
+
+        }
+
+        function deserializar(info){
+
+            return JSON.parse(info)
+
+        }
+        $("#nombre").text(info_recuperado.nombres).val();
+        $("#apellido").text(info_recuperado.apellidos).val();
+        $("#edad").text(info_recuperado.edades).val();
+        $("#ciudad").text(info_recuperado.ciudades).val();
+
+        let table=+ "<tbody>"
+            +"<td>"+ info_recuperado.nombres + "</td>" 
+            +"<td>"+ info_recuperado.apellidos + "</td>" 
+            +"<td>"+ info_recuperado.edades + "</td>" 
+            +"<td>"+ info_recuperado.ciudades + "</td>" 
+            +"</tbody>"
+
+        
+        
+
+    </script>
+
+</body>
+</html>
