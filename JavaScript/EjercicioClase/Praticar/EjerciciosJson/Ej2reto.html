@@ -2,102 +2,144 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>Ejercicio 1 JSON</title>
 </head>
 <body>
-    <input  id="nombre" placeholder="nombre">
-    <input  id="apellido" placeholder="apellido">
-    <input  id="edad" placeholder="edad">
-    <input  id="ciudad" placeholder="ciudad">
-
-    <button id="boton">Enviar</button>
+<form>
+    <label>Nombre</label>
+    <input id="nombre" name="nombre" type="text">
+    <label>Apellidos</label>
+    <input id="apellidos" name="apellidos" type="text">
+    <label>Edad</label>
+    <input id="edad" name="edad" type="number">
+    <label>Ciudad</label>
+    <input id="ciudad" name="ciudad" type="text">
     
-    <table>
+    <div>
+    <label>Hobbies:</label><br>
+    <label><input type="checkbox" id="deporte" name="hobbies[]" value="Deporte"> Deporte</label>
+    <label><input type="checkbox" id="lectura" name="hobbies[]" value="Lectura"> Lectura</label>
+    <label><input type="checkbox" id="musica" name="hobbies[]" value="Música"> Música</label>
+    <label><input type="checkbox" id="juegos" name="hobbies" value="Juegos"> Juegos</label>
+    <label><input type="checkbox" id="cine" name="hobbies" value="Cine"> Cine</label>
+    <label><input type="checkbox" id="teatro" name="hobbies" value="Teatro"> Teatro</label>
+    <label><input type="checkbox" id="coleccionismo" name="hobbies" value="Coleccionismo"> Coleccionismo</label>
+    <label><input type="checkbox" id="bricolaje" name="hobbies" value="Bricolaje"> Bricolaje</label>
+    <label><input type="checkbox" id="cosplay" name="hobbies" value="Cosplay"> Cosplay</label>
+</div>
+    <button type="button" id="enviar">Enviar</button>
+</form>
 
-        <thead>
-            <td>Nombre</td>
-            <td>Apellido</td>
-            <td>Edad</td>
-            <td>Ciudad</td>
-        </thead>
-        <tbody id="a">
+<div id="tabla"></div>
+<div id="resultados"></div>
 
-        </tbody>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    let lista = [];
+
+    $("#enviar").click(function () {
+        let nombre = $("#nombre").val();
+        let apellidos = $("#apellidos").val();
+        let edad = $("#edad").val();
+        let ciudad = $("#ciudad").val();
         
-
-    </table>
-    <button id="eliminar">Eliminar</button>
-
-    
-
-    
-    <script>
         
-        $("#boton").click(function() {
-           
-           let objJson = {
-               nombre: $("#nombre").val(),
-               apellido: $("#apellido").val(),
-               edad: $("#edad").val(),
-               ciudad: $("#ciudad").val(),
-           };
+        let hobbies = [];
+        $("input[name='hobbies']:checked").each(function() {
+            hobbies.push($(this).val());
+        });
 
-           const objetoSerializado = serializar(objJson);
-           const objetoRecuperado = deserializar(objetoSerializado);
+        let obj = {
+            "nombre": nombre,
+            "apellidos": apellidos,
+            "edad": edad,
+            "ciudad": ciudad,
+            "hobbies": hobbies
+        };
 
-           if($("#nombre").val()!="" && $("#apellido").val()!="" && $("#edad").val()!="" && $("#ciudad").val()!=""){
-           $("#a").append(generarLosNombres(objetoRecuperado));
+        lista.push(obj);
+        simulacro();
+    });
 
-           $("#nombre").val('');
-           $("#apellido").val('');
-           $("#edad").val('');
-           $("#ciudad").val('');
-           }else{
-               alert(alerta(objJson))
-           }
-       });
+    function simulacro() {
+        let lista_serializada = serializar(lista);
+        let lista_NOserializada = deserializar(lista_serializada);
+        generaTabla(lista_NOserializada);
+    }
 
-       function alerta(obj){
+    function serializar(objeto) {
+        return JSON.stringify(objeto);
+    }
 
-           let alertado;
+    function deserializar(objJson) {
+        return JSON.parse(objJson);
+    }
 
-           if($("#nombre").val()==""){
-               alertado="El campo 'nombre' es obligatorio"
-           }else if($("#apellido").val()==""){
-               alertado="El campo 'apellido' es obligatorio"
-           }else if($("#edad").val()==""){
-               alertado="El campo 'edad' es obligatorio"
-           }else{
-               alertado="El campo 'ciudad' es obligatorio"
-           }
+    function creaTabla() {
+        let tabla = "<table border='1' id='tabla_datos'>" +
+            "<thead>" +
+            "<tr>" +
+            "<th>Nombre</th>" +
+            "<th>Apellidos</th>" +
+            "<th>Edad</th>" +
+            "<th>Ciudad</th>" +
+            "<th>Hobbies</th>" +
+            "<th>Acción</th>" +
+            "</tr>" +
+            "</thead>";
+        tabla += "<tbody id='cuerpo'></tbody>";
+        tabla += "</table>";
+        return tabla;
+    }
 
-           return alertado
-       }
+    function nuevafila(obj, idObjeto) {
+        let hobbies = obj.hobbies.length > 0 ? obj.hobbies.join(", ") : "Ninguno";
+        return "<tr id='" + idObjeto + "'>" +
+            "<td>" + obj.nombre + "</td>" +
+            "<td>" + obj.apellidos + "</td>" +
+            "<td>" + obj.edad + "</td>" +
+            "<td>" + obj.ciudad + "</td>" +
+            "<td>" + hobbies + "</td>" +
+            "<td><button onclick='eliminarTR(" + idObjeto + ")'>Eliminar</button></td>" +
+            "</tr>";
+    }
 
+    function eliminarTR(idTR) {
+        lista.splice(idTR-1, 1); 
+        $("#" + idTR).remove();  
+        simulacro();
+    }
 
+    function generaTabla(lista) {
+        let tabla = creaTabla();
+        $("#tabla").html(tabla);
 
-       function serializar(obj){
-           return JSON.stringify(obj);
-       }
+        let suma = 0;
+        let cont = 0;
+        let max = 0;
+        let min = 999;
+        console.log(lista);
+        lista.forEach(function (elemento, index) {
+            cont++;
+            suma += parseInt(elemento.edad);
+            if (elemento.edad > max) max = elemento.edad;
+            if (elemento.edad < min) min = elemento.edad;
+        });
 
-       function deserializar(objJson){
-           return JSON.parse(objJson);
-       }
+        let media = cont > 0 ? suma / cont : 0;
 
-       function generarLosNombres(obj) {
-           return `<tr>
-                       <td>${obj.nombre}</td>
-                       <td>${obj.apellido}</td>
-                       <td>${obj.edad}</td>
-                       <td>${obj.ciudad}</td>
-                   </tr>`;
-       }
-        
+        let pSuma = "<p>Suma de edades: " + suma + "</p>";
+        let pMedia = "<p>Edad media: " + media.toFixed(2) + "</p>";
+        let pMax = "<p>Edad máxima: " + max + "</p>";
+        let pMin = "<p>Edad mínima: " + min + "</p>";
 
+        $("#resultados").html(pSuma + pMedia + pMax + pMin);
 
-    </script>
-
+        lista.forEach(function (elemento, index) {
+            $("#tabla_datos").append(nuevafila(elemento, index + 1));
+        });
+    }
+</script>
 </body>
 </html>
+
