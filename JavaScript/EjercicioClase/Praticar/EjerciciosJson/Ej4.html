@@ -15,11 +15,12 @@
     <label>Ciudad</label>
     <input id="ciudad" name="ciudad" type="text">
     
+    <!--Muestra en la pagina web todos los posibles elecciones que puedes marcar-->
     <div>
     <label>Hobbies:</label><br>
-    <label><input type="checkbox" id="deporte" name="hobbies[]" value="Deporte"> Deporte</label>
-    <label><input type="checkbox" id="lectura" name="hobbies[]" value="Lectura"> Lectura</label>
-    <label><input type="checkbox" id="musica" name="hobbies[]" value="Música"> Música</label>
+    <label><input type="checkbox" id="deporte" name="hobbies" value="Deporte"> Deporte</label>
+    <label><input type="checkbox" id="lectura" name="hobbies" value="Lectura"> Lectura</label>
+    <label><input type="checkbox" id="musica" name="hobbies" value="Música"> Música</label>
     <label><input type="checkbox" id="juegos" name="hobbies" value="Juegos"> Juegos</label>
     <label><input type="checkbox" id="cine" name="hobbies" value="Cine"> Cine</label>
     <label><input type="checkbox" id="teatro" name="hobbies" value="Teatro"> Teatro</label>
@@ -37,18 +38,23 @@
 <script>
     let lista = [];
 
+    //Usa el id del boton, si lo pulsas dara inicio a todas las funciones para crear la tabla
     $("#enviar").click(function () {
+
+        /*Crea variables a partir de las id de cada input que hemos hecho, introduce en esta 
+        variable lo que hemos escrito en los inputs*/
         let nombre = $("#nombre").val();
         let apellidos = $("#apellidos").val();
         let edad = $("#edad").val();
         let ciudad = $("#ciudad").val();
         
-        
+        //Introduce dentro de la variable hobbies, todos los inputs que hemos marcado con el nombre hobbies
         let hobbies = [];
         $("input[name='hobbies']:checked").each(function() {
             hobbies.push($(this).val());
         });
 
+        //Introduce todos los valores en la variable obj
         let obj = {
             "nombre": nombre,
             "apellidos": apellidos,
@@ -57,22 +63,26 @@
             "hobbies": hobbies
         };
 
+        //Sube la variable lista, con todo lasvariables introducidas
         lista.push(obj);
 
         // Cálculos: suma, media, máximo y mínimo
         let suma = 0;
         let max = 0;
-        let min = 999; // Valor alto inicial para encontrar el mínimo
+        let min = 999; // Valor mas alto inicial para encontrar el mínimo
         let cont = lista.length;
 
+        //Comprueba los minimos y los maximos y suma  todos los valores de edad introducidos
         lista.forEach(function (elemento) {
             suma += parseInt(elemento.edad);
             if (elemento.edad > max) max = elemento.edad;
             if (elemento.edad < min) min = elemento.edad;
         });
 
+        //Crea la variable media 
         let media = cont > 0 ? suma / cont : 0;
 
+        //Introduce todos los datos que hemos calculado a la variable datosCalculados
         let datosCalculados = {
             suma: suma,
             media: media,
@@ -80,7 +90,7 @@
             min: min
         };
 
-        // Crear objeto final que se va a enviar
+        // Crear objeto final que se va a enviar al servidor
         let datosEnviados = {
             "personas": lista,
             "calculos": datosCalculados
@@ -93,6 +103,7 @@
             contentType: "application/json",
             data: JSON.stringify(datosEnviados),
             success: function(response) {
+
                 // Procesar la respuesta del servidor
                 console.log(response); // Muestra la respuesta de la página
                 let datosRespuesta = JSON.parse(response);
@@ -105,28 +116,34 @@
                     "<p>Edad mínima: " + datosRespuesta.calculos.min + "</p>"
                 );
             },
+
+            //Si hay algun error procedente del servidor, envia por consola el error 
             error: function(xhr, status, error) {
                 console.error("Error al enviar los datos:", error);
             }
         });
 
-        simulacro();
+        simulacro();//?
     });
 
+    //?
     function simulacro() {
         let lista_serializada = serializar(lista);
         let lista_NOserializada = deserializar(lista_serializada);
         generaTabla(lista_NOserializada);
     }
 
-    function serializar(objeto) {
-        return JSON.stringify(objeto);
+    //Devolvemos los valores introducidos en la variable obj (antes estaba puesto objeto en vez de obj)
+    function serializar(obj) {
+        return JSON.stringify(obj);
     }
 
+    //?
     function deserializar(objJson) {
         return JSON.parse(objJson);
     }
 
+    //Crea la base de la tabla
     function creaTabla() {
         let tabla = "<table border='1' id='tabla_datos'>" +
             "<thead>" +
@@ -144,6 +161,7 @@
         return tabla;
     }
 
+    //Envia la informacion introducida y crea una fila de la tabla en base a esa información
     function nuevafila(obj, idObjeto) {
         let hobbies = obj.hobbies.length > 0 ? obj.hobbies.join(", ") : "Ninguno";
         return "<tr id='" + idObjeto + "'>" +
@@ -156,12 +174,14 @@
             "</tr>";
     }
 
+    //Elimina una fila de la tabla
     function eliminarTR(idTR) {
         lista.splice(idTR-1, 1); 
         $("#" + idTR).remove();  
         simulacro();
     }
 
+    //Crea la tabla con ayuda de la funcion que crea una nueva fila
     function generaTabla(lista) {
         let tabla = creaTabla();
         $("#tabla").html(tabla);
