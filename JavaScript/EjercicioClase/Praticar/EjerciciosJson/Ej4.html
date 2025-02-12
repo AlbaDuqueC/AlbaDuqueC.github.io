@@ -102,11 +102,12 @@
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(datosEnviados),
-            success: function(response) {
+            success: function(responde) {
 
                 // Procesar la respuesta del servidor
-                console.log(response); // Muestra la respuesta de la página
-                let datosRespuesta = JSON.parse(response);
+                console.log(responde); // Muestra la respuesta de la página
+                let datosRespuesta = JSON.parse(responde);//ERROR
+                return datosRespuesta;
                 
                 // Mostrar los cálculos obtenidos del servidor
                 $("#resultados").html(
@@ -123,10 +124,10 @@
             }
         });
 
-        simulacro();//?
+        simulacro();
     });
 
-    //?
+  
     function simulacro() {
         let lista_serializada = serializar(lista);
         let lista_NOserializada = deserializar(lista_serializada);
@@ -138,7 +139,7 @@
         return JSON.stringify(obj);
     }
 
-    //?
+   
     function deserializar(objJson) {
         return JSON.parse(objJson);
     }
