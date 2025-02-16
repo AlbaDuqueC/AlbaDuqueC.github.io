@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 JS</title>
+</head>
+<body>
+
+    <p id="escribirTabla"></p>
+    <br>
+    <button onclick="mayor()">Mayor</button>
+    <p id="escribirMayor"></p>
+    <br>
+    <p id="escribirPersona"></p>
+
+    
+    <script>
+        let arrays =[1, 2, 3, 4, 5]
+
+        arrays.push(6)
+        arrays.shift(0)
+
+        escribirTabla.textContent = arrays
+
+        function mayor(){
+            let mayorA=[1,2,8,4,5]
+            let num=0;
+           
+
+            for(let i = 0; i<mayorA.length ; i++){
+
+                if(num<mayorA[i]){
+                    num=mayorA[i]
+
+                }
+
+            }
+
+            escribirMayor.textContent = num
+
+
+        }
+
+        persona={'nombre': 'Simona' , 'edad' : 28 , 'ciudad': 'sevilla'}
+
+        console.log(persona)
+        persona.ocupacion= 'disociar'
+
+        delete(persona.ciudad)
+
+        escribirPersona.textContent= `Nombre: ${persona.nombre}, edad: ${persona.edad}, ocupacion: ${persona.ocupacion}`
+
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 JSON</title>
+</head>
+<body>
+    <script>
+
+        let persona = {'nombre' : 'Fer' , 'apellidos': 'Sad' , 'edad' : 22 , 'ciudad' : 'Sevilla'}
+        json_persona_serializar= serializar(persona)
+        console.log(json_persona_serializar)
+        persona_deserializar= deserializar(json_persona_serializar)
+        console.log(persona_deserializar)
+
+        function serializar(per){
+
+            return JSON.stringify(per)
+        }
+
+        function deserializar(perJSON){
+            return JSON.parse(perJSON)
+        }
+
+    </script>
+</body>
+</html>

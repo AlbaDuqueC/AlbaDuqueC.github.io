@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 JS</title>
+</head>
+<body>
+
+    <label for="edad">Edad:</label>
+    <input type="text" id="edad">
+    <br>
+
+    <button onclick="parOimpar()">Par o impar</button>
+    <p id="escribirPar"></p>
+    <br>
+    <button onclick="mayorEdad()">Mayor de edad</button>
+    <p id="escribirMayor"></p>
+
+    <br>
+    <button onclick="bucle()">bucle</button>
+    <p id="escribirBucle"></p>
+    <p id="escribirSuma"></p>
+
+    <script>
+
+        
+
+        function parOimpar(){
+            let edad = document.getElementById('edad').value;
+            
+
+            if (edad%2==0){
+                console.log('La edad es par');
+                escribirPar.textContent='La edad es par';
+            }else{
+                console.log('La edad es impar');
+                escribirPar.textContent= 'La edad es impar';
+            }
+
+           
+        }
+        function mayorEdad(){
+            let edad = document.getElementById('edad').value;
+
+            if (edad>=18){
+                console.log('Es mayor de edad')
+                escribirMayor.textContent= 'Es mayor de edad'
+
+            }else{
+                console.log=('Es menor de edad')
+                escribirMayor.textContent= 'Es menor de edad'
+            }
+
+        }
+
+        function bucle(){
+            let edad = document.getElementById('edad').value;
+            let suma=0;
+            for(let i =0 ; i<=edad ; i++){
+                
+                console.log(i);
+                escribirBucle.textContent+=`${i} ` 
+                suma=suma+i
+            }
+            escribirSuma.textContent=suma
+        }
+
+
+
+
+    </script>
+    
+</body>
+</html>
