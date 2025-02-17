@@ -9,16 +9,26 @@
    
 </head>
 <body>
+
+    <!--ponemos en el html un titulo, un boton, un seleccionador de opciones y un div con una imagen -->
     <h1 class="mb-4">Galería de Perros</h1>
+
+    <!--este boton llaama a la funcio randomBtn, que te mostrara si lo pulsas una imagen aleatoria-->
     <button id="randomBtn" class="btn btn-primary">Aleatorio</button>
+
+    <!--aqui podremos seleccionar el tipo de raza que queremos-->
     <select id="breedSelect" class="form-select mt-3 w-50 mx-auto">
         <option value="">Seleccione una raza</option>
     </select>
+
+    <!--la imagen del perro que elegimos, que comunica con las dos funciones mediante dogImagen-->
     <div class="mt-4">
         <img id="dogImage" src="" alt="Imagen de perro" class="d-none">
     </div>
     
     <script>
+
+        
         document.addEventListener("DOMContentLoaded", () => {
             const randomBtn = document.getElementById("randomBtn");
             const breedSelect = document.getElementById("breedSelect");
