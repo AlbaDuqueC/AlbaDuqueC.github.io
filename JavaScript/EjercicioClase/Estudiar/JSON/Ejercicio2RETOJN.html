@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 RETO JSON</title>
+</head>
+<body>
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre">
+
+    <label for="apellidos">Apellido</label>
+    <input type="text" id="apellidos">
+
+    <label for="edad">Edad</label>
+    <input type="number" id="edad">
+
+    <label for="ciudad">Ciudad</label>
+    <input type="text" id="ciudad">
+
+    <button id="tablita">Enviar</button>
+
+    <table border="1" id="escribirTabla">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Ciudad</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <p id="escribirEdades"></p>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        let personas = [];  // Array para almacenar las filas
+        let numpersonas = 0;
+        let max = 0;
+        let min = Infinity;
+        let suma = 0;
+
+        $('#tablita').click(function () {
+            let persona = {
+                id: Date.now(),  // Genera un ID único basado en el tiempo
+                nombre: $('#nombre').val(),
+                apellidos: $('#apellidos').val(),
+                edad: parseInt($('#edad').val()),  // Convertir edad a número
+                ciudad: $('#ciudad').val()
+            };
+
+            // Validaciones
+            if (persona.nombre === "" || persona.apellidos === "" || isNaN(persona.edad) || persona.ciudad === "") {
+                alert("Por favor, completa todos los campos correctamente.");
+                return;
+            }
+
+            // Agregar persona al array
+            personas.push(persona);
+
+            // Recalcular estadísticas
+            numpersonas++;
+            suma += persona.edad;
+            if (persona.edad > max) max = persona.edad;
+            if (persona.edad < min) min = persona.edad;
+
+            let media = suma / numpersonas;
+
+            // Serializar y deserializar
+            let json_personas = serializar(personas);
+            personas = deserializar(json_personas);
+
+            // Generar la tabla
+            generaTabla();
+
+            // Actualizar estadísticas
+            actualizarEstadisticas(suma, media, max, min);
+        });
+
+        function serializar(data) {
+            return JSON.stringify(data);
+        }
+
+        function deserializar(data) {
+            return JSON.parse(data);
+        }
+
+        function generaTabla() {
+            let tbody = $('#escribirTabla tbody');
+            tbody.empty();  // Elimina las filas anteriores
+
+            personas.forEach(persona => {
+                tbody.append(generaTR(persona));
+            });
+        }
+
+        function generaTR(persona) {
+            return `
+                <tr id="fila-${persona.id}">
+                    <td>${persona.nombre}</td>
+                    <td>${persona.apellidos}</td>
+                    <td>${persona.edad}</td>
+                    <td>${persona.ciudad}</td>
+                    <td><button onclick="eliminar(${persona.id}, ${persona.edad})">Eliminar</button></td>
+                </tr>
+            `;
+        }
+
+        function eliminar(id, edadEliminada) {
+            // Buscar índice del objeto en el array y eliminarlo
+            let index = personas.findIndex(p => p.id === id);
+            if (index !== -1) {
+                personas.splice(index, 1);
+            }
+
+            // Actualizar estadísticas
+            numpersonas--;
+            suma -= edadEliminada;
+            max = Math.max(...personas.map(p => p.edad), 0);
+            min = Math.min(...personas.map(p => p.edad), Infinity);
+
+            let media = numpersonas > 0 ? suma / numpersonas : 0;
+
+            // Volver a generar la tabla sin el elemento eliminado
+            generaTabla();
+
+            // Actualizar estadísticas
+            actualizarEstadisticas(suma, media, max, min);
+        }
+
+        function actualizarEstadisticas(suma, media, max, min) {
+            $('#escribirEdades').html(
+                `Suma: ${suma} <br>
+                Media: ${media.toFixed(2)} <br>
+                Máximo: ${max} <br>
+                Mínimo: ${min === Infinity ? 'N/A' : min}`
+            );
+        }
+    </script>
+</body>
+</html>
