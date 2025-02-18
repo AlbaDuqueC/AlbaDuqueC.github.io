@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 JS</title>
+</head>
+<body>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre">
+    <label for="edad">Edad:</label>
+    <input type="text" id="edad">
+    <label for="numero">Numero:</label>
+    <input type="text" id="numero">
+    <button id="activar" onclick="ponerTexto()">Enviar</button>
+    <p id="poner"></p>
+    
+    <script>
+
+        function ponerTexto(){
+
+            let nombre = document.getElementById('nombre').value;
+            let edad= document.getElementById('edad').value;
+            let numero = document.getElementById('numero').value;
+
+            let menseje= `Mi nombre es ${nombre} y tengo ${edad} años `;
+            console.log(menseje);
+            poner.textContent=menseje;
+        }
+
+    </script>
+</body>
+</html>

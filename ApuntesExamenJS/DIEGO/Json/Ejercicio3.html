@@ -64,44 +64,15 @@
 
     let texto=''
 
-    /*Restricción Checkboxes:
-
-        -Permite seleccionar máximo 2 hobbies.
-        -Si ya hay 2 seleccionados, los demás checkboxes se deshabilitan.
-        -Si se desmarca uno, los otros vuelven a estar habilitados.
-    */
-    $('input:checkbox').on('change', function () {
-
-        //Permite seleccionar máximo 2 hobbies.
-        let num = $('input:checkbox').filter(':checked').length;
-
-        if(num > 2){
-            //Si ya hay 2 seleccionados, los demás checkboxes se deshabilitan.
-            $('input:checkbox').filter(':not(:checked)').prop('disabled', true);
-        } else {
-            //Si se desmarca uno, los otros vuelven a estar habilitados.
-            $('input:checkbox').prop('disabled', false);
-        }
-    });
-
-    /*Crear una Persona y Agregarla a la Tabla:
-
-    Cuando el usuario hace clic en el botón "Cookear", se ejecuta esta función.
-
-        -Se captura la información de los campos.
-        -Se crea un objeto persona con los datos.
-        -Se llama a anyadirTabla(persona), que agrega la persona a la tabla.
-    */
      $('#crearPersona').click(function(){
 
-        //Se captura la información de los campos y se crea un objeto persona con los datos.
         persona = {
 
             'nombre': $('#nombre').val(),
             'apellido': $('#apellido').val(),
             'edad': $('#edad').val(),
             'ciudad': $('#ciudad').val(),
-            'hobbies': $('input[name="hobbies"]')
+            'hobbies': $('input[name="hobbies[]"]')
             .filter(':checked')
             .map(function () {
                     return $(this).val();
@@ -111,24 +82,14 @@
 
         }
 
-        //Se llama a anyadirTabla(persona), que agrega la persona a la tabla.
         anyadirTabla(persona)
             
     })
 
-    /*Función anyadirTabla(persona):
-
-        -Valida que todos los campos estén llenos y la edad sea positiva.
-        -Si todo está bien, agrega una fila a la tabla con los datos de la persona.
-        -Guarda la edad en la lista lista[] (para cálculos).
-        -Llama a actualizarDatos() para actualizar las estadísticas.
-    */
     function anyadirTabla(){
 
-        //Valida que todos los campos estén llenos y la edad sea positiva.
         if(persona.nombre!="" && persona.apellido!="" && persona.edad!=""&& persona.edad>=0 && persona.ciudad!=""){
         //Forma 1
-        //Agrega una fila a la tabla con los datos de la persona.
         $("#personas").append(
             `<tr onclick='borrar(this)'><td>${persona.nombre}</td>
                 <td>${persona.apellido}</td>
@@ -145,52 +106,32 @@
                 "<td>"+persona.ciudad+"</td>"+ "</tr>"
         )*/
 
-            //Guarda la edad en la lista lista[] (para cálculos).
             lista.push(parseInt(persona.edad));
-
-            //Llama a actualizarDatos() para actualizar las estadísticas.
             actualizarDatos();
-           
+
             }else{
                 alert('No se han introducido todos los datos correctamente')
             }
     }
 
-    /*Función para Eliminar una Fila:
-    
-        -Cuando se hace clic en una fila de la tabla, se obtiene la edad de esa persona.
-        -Se elimina la edad de lista[].
-        -Se borra la fila de la tabla.
-        -Se actualizan las estadísticas.
-    */
     function borrar(fila){
 
-        //Cuando se hace clic en una fila de la tabla, se obtiene la edad de esa persona.
         //Obtiene el valor de la tercera celda ("td:eq(2)") de la fila eliminada y la convierte en un entero
         let edadEliminada = parseInt($(fila).find("td:eq(2)").text());
 
-        //Se elimina la edad de lista[].
         let pos = lista.indexOf(edadEliminada)
         if(pos!==-1){
             lista.splice(pos,1);
         }
 
-        //Se borra la fila de la tabla.
         $(fila).remove();
 
-        //Se actualizan las estadísticas.
         actualizarDatos();
         
     }
 
     
 
-    /*Función para Calcular Estadísticas:
-    
-        -Calcula la suma, máximo, mínimo y media de las edades en lista[].
-        -Muestra los resultados en #datos.
-
-    */
     function actualizarDatos(){
 
         let suma=0;
@@ -198,7 +139,6 @@
         let media=0;
         let minimo=240000000000;
 
-        //Calcula la suma, máximo, mínimo y media de las edades en lista[].
         for(i=0;i<lista.length;i++){
             suma+=parseInt(lista[i])
             if(parseInt(lista[i])>maximo){
@@ -211,7 +151,6 @@
 
         media=(suma/lista.length);
 
-        //Muestra los resultados en #datos.
         if(lista.length>0){
             $('#datos').html(`Suma: ${suma} 
             & Media: ${media} 

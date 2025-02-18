@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 JS</title>
+</head>
+<body>
+
+    <button onclick="cambiar()">Saluda</button>
+    <p id="escribir"></p>
+
+    <button onclick="eliminar()">Eliminar</button>
+    <ol>
+        <li id="list1"></li>
+        <li id="list2"></li>
+        <li id="list3"></li>
+        <li id="list4"></li>
+        <li id="list5"></li>
+    </ol>
+
+    <script>
+
+        function cambiar(){
+
+            escribir.textContent = 'Hola'
+
+            list1.textContent='1'
+            list2.textContent='2'
+            list3.textContent='3'
+            list4.textContent='4'
+            list5.textContent='5'
+        }
+
+        function eliminar(){
+            list5.textContent=''
+        }
+
+    </script>
+    
+</body>
+</html>

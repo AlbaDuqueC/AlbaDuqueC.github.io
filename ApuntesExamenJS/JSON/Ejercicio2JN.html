@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 JSON</title>
+</head>
+<body>
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre">
+
+    <label for="apellidos">Apellido</label>
+    <input type="text" id="apellidos">
+
+    <label for="edad">Edad</label>
+    <input type="number" id="edad">
+
+    <label for="ciudad">Ciudad</label>
+    <input type="text" id="ciudad">
+
+    <button id="tablita" >Enviar</button>
+
+    <table  border="1" id="escribirTabla">
+        <thead >
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Ciudad</th>
+            </tr>
+        </thead>
+       
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+
+    $('#tablita').click(function(){
+
+        persona = {
+        'nombre' : $('#nombre').val(), 
+        'apellidos': $('#apellidos').val() ,
+        'edad' : $('#edad').val(),
+        'ciudad' : $('#ciudad').val()
+        }
+        console.log(persona)
+
+        //Manda a la funcion serealizar la variable persona y este devuelve ya la variable convertida a JSON 
+        json_persona_serializar= serializar(persona)
+        console.log(json_persona_serializar)
+
+        //Manda a la funcion desarializar la variable anterior que convirtió persona en JSON, esta funcion devuelve sin ser ya JSON
+        persona_deserializar= deserializar(json_persona_serializar)
+        console.log(persona_deserializar)
+
+        tabla()
+        
+    })
+
+        //Convierte una variable JavaScript a JSON
+        function serializar(per){
+
+            return JSON.stringify(per)
+        }
+
+        //Convierte una variable JSON a JavaScript
+        function deserializar(perJSON){
+            return JSON.parse(perJSON)
+        }
+
+        //Imprime la tabla
+        function tabla(){
+
+
+            $('#escribirTabla').append(
+                `<tr>
+                    <td>${persona.nombre}</td>
+                    <td>${persona.apellidos}</td>
+                    <td>${persona.edad}</td>
+                    <td>${persona.ciudad}</td> 
+                    
+                </tr>`
+            )
+            console.log("Holiwis")
+
+        }
+
+    </script>
+</body>
+</html>
