@@ -1,50 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FUTBOLEROS</title>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de Equipos de Fútbol</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+        }
+        #teamInfo {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Información de Equipos de Fútbol</h1>
+        <select id="teamSelector" class="form-control">
+            <option value="Chelsea">Chelsea</option>
+            <option value="Manchester United">Manchester United</option>
+            <option value="Liverpool">Liverpool</option>
+            <option value="Arsenal">Arsenal</option>
+            <!-- Puedes agregar más equipos aquí -->
+        </select>
+        <button id="fetchButton" class="btn btn-primary mt-3">Buscar</button>
+        <div id="teamInfo" class="mt-3"></div>
+    </div>
 
-<h1>CONOCE LOS DATOS DE TU EQUIPO</h1>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fetchButton = document.getElementById('fetchButton');
+            const teamSelector = document.getElementById('teamSelector');
+            const teamInfoDiv = document.getElementById('teamInfo');
 
-<form onsubmit="event.preventDefault(); solicitudAjax();">
-
-    <label for="nombre">Nombre:</label>
-    <br> 
-    <input type="text" id="nombre" name="nombre">
-    <br> 
-    <button type="submit">Recibir Datos</button> 
-
-</form>
-
-<script>
-
-    function solicitudAjax() { 
-
-        var nombre = document.getElementById("nombre").value;
-
-        $.ajax({ 
-
-            url: "https://thesportsdb.com/api/v1/json/3/searchteams.php?t=" + encodeURIComponent(nombre), 
-            method: "GET", 
-            dataType: "json",
-
-            success: function(data) {
-
-                console.log(data); 
-            }, 
-
-            error: function(xhr, status, error) {
-                console.log(`Error: ${xhr.status} - ${error}`);
-            } 
-            
+            fetchButton.addEventListener('click', () => {
+                const teamName = teamSelector.value;
+                fetch(`https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=${teamName}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const team = data.teams[0];
+                        teamInfoDiv.innerHTML = `
+                            <h2>${team.strTeam}</h2>
+                            <p><strong>Estadio:</strong> ${team.strStadium}</p>
+                            <p><strong>Ubicación:</strong> ${team.strStadiumLocation}</p>
+                            <p><strong>Descripción:</strong> ${team.strDescriptionEN}</p>
+                            <img src="${team.strTeamBadge}" alt="Escudo del equipo" class="img-fluid">
+                        `;
+                    })
+                    .catch(error => {
+                        teamInfoDiv.innerHTML = `<p class="text-danger">Error: ${error.message}</p>`;
+                    });
+            });
         });
-    }
-</script>
+    </script>
 </body>
 </html>
