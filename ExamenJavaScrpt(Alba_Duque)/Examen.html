@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOS TRILEROS</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body id="body">
+
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        #enviar{
+            border: 1px solid rgb(67, 8, 102);
+            background-color: rgb(171, 129, 196);
+
+        }
+        #body{
+            background-color: rgb(242, 219, 255);
+            text-align: center;
+        }
+        #titulo{
+            color: rgb(67, 8, 102);
+        }
+
+
+    </style>
+    
+
+    <h1 id="titulo">LOS TRILEROS</h1>
+    <br>
+    <h2 id="titulo">Alba Duque Crespo</h2>
+    <br>
+    <label for="nombre">Nombre: </label>
+    <input type="text" id="nombre">
+
+    <label for="apellido">Apellido: </label>
+    <input type="text" id="apellido">
+
+    <label for="contraseña">Contraseña: </label>
+    <input type="text" id="contraseña">
+
+    <br>
+    <br>
+
+    <!--dos casillas numericar, una indica el numero de vasos y la otra pindica el baso por el que realiza la apuesta-->
+    <label for="numero_vasos">Numero de vasos: </label>
+    <input type="number" id="numero_vasos">
+
+    <label for="vaso">Vaso: </label>
+    <input type="number" id="vaso">
+
+    <br>
+    <br>
+
+    <button type="button" id="enviar">Enviar</button>
+    <div id="idAcceso"></div>
+
+    <p id="error"></p>
+    <p id="contraseñaIncorrecta"></p>
+
+    <div id="ganadores"></div>
+    
+
+    <br>
+    <br>
+
+
+
+
+    <script>
+
+
+
+        $('#enviar').click(function () {
+
+            let nombre = $('#nombre').val;
+            let apellido = $('#apellido').val;
+            let contraseña = $('#contraseña').val;
+            let numero_vasos = $('#numero_vasos').val;
+            let vaso = $('#vaso').val;
+
+
+
+
+            if (!nombre || !apellido || !contraseña) {
+                $('#error').html('<h2 class="error">Todos los campos son obligatorio ponerlos.</h2>');
+                return
+            }
+
+
+
+            
+            /* if (contraseña != "TRUCO") {
+                 $('#contraseñaIncorrecta').html('<h2 class="error">La contraseña es incorrecta.</h2>');
+                 return
+             } else {
+                 juego(numero_vasos, vaso)
+             }*/
+
+            guardarProductoApi(nombre, apellido, contraseña, numero_vasos, vaso)
+
+
+
+
+
+        })
+
+        function guardarProductoApi() {
+
+            $.ajax({
+                url: "https://lm.iesnervion.es/vasos.php",
+                method: "POST",
+                data: {
+                    "nombre": $('#nombre').val(),
+                    "apellido": $('#apellido').val(),
+                    "contraseña": $('#contraseña').val(),
+                    "numero_vasos": $('#numero_vasos').val(),
+                    "vaso": $('#vaso').val()
+                },
+
+                contentType: "application/json",
+
+                dataType: "json",
+
+                success: function (data) {
+                    console.log("Datos enviados a la API:", data);
+
+                    if (data.error) {
+                        $("#error").html("<h2 class='error'>" + data.error + "</h2>");
+                    } else {
+                        $("#error").html("<h2>Datos enviados correctamente</h2>");
+                        cargarBolitaAPI();
+                    }
+                },
+
+                error: function (xhr, status, error) {
+                    console.log(`Error al enviar los datos: ${xhr.status} - ${error}`);
+                    $("#titulo").html("<h2 class='error'>Error al enviar los datos a la API.</h2>");
+                }
+                
+
+        });
+
+        }
+        function cargarBolitaAPI() {
+            $.ajax({
+                url: "https://lm.iesnervion.es/vasos.php",
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log("Datos recibidos de la API:", data);
+
+                    if (data.error) {
+                        $("#error").html("<h2 class='error'>" + data.error + "</h2>");
+                    } else {
+                        $("#error").html("<h2>Datos recibidos correctamente</h2>");
+                        mostrarGanadores(data);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(`Error al recibir los datos: ${xhr.status} - ${error}`);
+                    $("#error").html("<h2 class='error'>Error al recibir los datos de la API.</h2>");
+                }
+            });
+        }
+
+        function mostrarGanadores(data) {
+            console.log("Estos son los ganadores:", data.ganadores);
+
+            let lista = data.ganadores;
+
+            for (let i = 0; i < numero_vasos; i++) {
+                $('#ganadores').html(`
+                <h1>numero de vasos: ${lista[i].numero_vasos}</h1>
+                <h1>vaso: ${lista[i].vaso}</h1>
+
+                <ol>
+                <li>${lista[i]}</li>
+                </ol>
+                `);
+            }
+
+
+        }
+        function id(){
+            $('#idAcceso').html(
+                `
+                <label for="acceder">ID </label>
+                <input type="text" name="id" id="id">
+
+                <button type="button" id="enviarAcceso">Acceder</button>
+                `
+            )
+
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
