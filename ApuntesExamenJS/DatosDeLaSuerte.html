@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos de la suerte</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+
+    <label for="nombre">Nombre: </label>
+    <input type="text" id="nombre">
+
+    <label for="apellido">Apellido: </label>
+    <input type="text" id="apellido">
+
+    <label for="contraseña">Contraseña: </label>
+    <input type="text" id="contraseña">
+
+    <button type="button" id="enviar">Enviar</button>
+
+    <div id="accederJuego"></div>
+
+    <div id="ponerApuesta"></div>
+
+
+
+    <script>
+
+        $('#enviar').click(function () {
+
+            let nombre = $('#nombre').val;
+            let apellido = $('#apellido').val;
+            let contraseña = $('#contraseña').val;
+
+            console.log('a')
+
+            empezarJuego()
+
+
+
+
+
+        })
+
+        function empezarJuego() {
+
+            $('#accederJuego').html(
+                `
+                <label for="acceder">Escriba TAPETE para acceder al juego: </label>
+                <input type="text" name="acceder" id="acceder">
+
+                <button type="button" id="enviarAcceso">Acceder</button>
+                `
+            )
+
+
+
+        }
+
+        $('#enviarAcceso').click(function () {
+
+            console.log('mi puta vida')
+
+            let tapete = $('#acceder').val
+
+            if (tapete === 'TAPETE') {
+
+
+                $('#textContent').html(
+                    `
+                    <label for="numApuesta">Apuesta</label>
+                    <input type="number" name="numApuesta" id="numApuesta">
+                    <button type="button" id="enviarApuesta"></button>
+                    
+                    `
+                )
+            }
+
+        })
+
+    </script>
+
+</body>
+
+</html>
