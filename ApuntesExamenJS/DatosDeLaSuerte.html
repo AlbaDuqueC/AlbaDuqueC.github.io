@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos de la suerte</title>
+    <title>Dados de la suerte</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 </head>
@@ -20,11 +20,14 @@
     <label for="contraseña">Contraseña: </label>
     <input type="text" id="contraseña">
 
+    <label for="apuesta">Apuesta: </label>
+    <input type="number" id="apuesta">
+
     <button type="button" id="enviar">Enviar</button>
 
-    <div id="accederJuego"></div>
+    <br>
 
-    <div id="ponerApuesta"></div>
+    <p id="resultado"></p>
 
 
 
@@ -32,55 +35,72 @@
 
         $('#enviar').click(function () {
 
-            let nombre = $('#nombre').val;
-            let apellido = $('#apellido').val;
-            let contraseña = $('#contraseña').val;
+            let nombre = $('#nombre').val();
+            let apellido = $('#apellido').val();
+            let contraseña = $('#contraseña').val();
+            let apuesta = $('#apuesta').val();
 
             console.log('a')
 
-            empezarJuego()
+            if (!nombre || !apellido || !contraseña || !apuesta) {
 
+                $('#resultado').html('<h2 class="error">Todos los campos son obligatorios</h2>')
+                return;
 
+            } else if (apuesta < 1 || apuesta > 12) {
 
+                $('#resultado').html('<h2 class="error">La apuesta debe ser entre 1 y 12</h2>')
+                return;
 
+            } else if (contraseña === 'TAPETE') {
 
-        })
+                empezarJuego()
 
-        function empezarJuego() {
+            } else {
 
-            $('#accederJuego').html(
-                `
-                <label for="acceder">Escriba TAPETE para acceder al juego: </label>
-                <input type="text" name="acceder" id="acceder">
-
-                <button type="button" id="enviarAcceso">Acceder</button>
-                `
-            )
-
-
-
-        }
-
-        $('#enviarAcceso').click(function () {
-
-            console.log('mi puta vida')
-
-            let tapete = $('#acceder').val
-
-            if (tapete === 'TAPETE') {
-
-
-                $('#textContent').html(
-                    `
-                    <label for="numApuesta">Apuesta</label>
-                    <input type="number" name="numApuesta" id="numApuesta">
-                    <button type="button" id="enviarApuesta"></button>
-                    
-                    `
-                )
+                $('#resultado').html('<h2 class="error">Contraseña incorrecta</h2>')
             }
 
         })
+
+       function empezarJuego(){
+ 
+             let dado1 = Math.floor(Math.random() * 6) + 1;
+             let dado2 = Math.floor(Math.random() * 6) + 1;
+ 
+             let suma = dado1 + dado2;
+ 
+             solicitud();
+ 
+         }
+
+        function envio(objeto_js) {
+            $.post("https://lm.iesnervion.es/dados.php",
+                JSON.stringify(objeto_js),
+                function (response) {
+                    console.log(response);
+                },
+                "json"
+            )
+                .fail(function (xhr, status, error) {
+                    console.log(`Error: ${xhr.status} - ${error}`);
+                });
+        }
+
+        function solicitud() {
+            $.get("https://lm.iesnervion.es/dados.php")
+                .done(function (data) {
+                    console.log(data);
+                })
+                .fail(function (xhr, status, error) {
+                    console.log(`Error: ${xhr.status} - ${error}`);
+                });
+        }
+
+
+
+
+
 
     </script>
 
