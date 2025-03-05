@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Ejercicio 2 </title>
+
+</head>
+<body>
+   
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre">
+
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido">
+
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad">
+
+    <label for="Ciudad">Ciudad:</label>
+    <input type="text" id="ciudad">
+
+    <button id="crearPersona">Hacerlo</button>
+
+    <br><br>
+
+    <table border="1" id="personas">
+
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Ciudad</th>
+            </tr>
+        </thead>
+
+
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+
+        let nombre = $("#nombre");
+        let apellido = $("#apellido");
+        let edad = $("#edad");
+        let ciudad = $("#ciudad");
+
+        // Inicializar la aplicación
+        const model = new TaskModel(nombre, apellido, edad, ciudad);
+        const view = new View(nombre, apellido, edad, ciudad);
+        const controller = new TaskController(model, view);
+
+    </script>
+</body>
+</html>
