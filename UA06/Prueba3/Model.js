@@ -2,11 +2,6 @@ class Model{
 
     lista = []
 
-    private id
-    private descripcion
-    private fecha 
-    private estado
-
     constructor( id,  descripcion,  fecha,  estado){
         this.id = id
         this.descripcion = descripcion 
