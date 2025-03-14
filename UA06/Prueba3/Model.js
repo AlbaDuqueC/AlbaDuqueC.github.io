@@ -28,13 +28,26 @@ class TareasModel {
         this.lista.push(obj);
     }
 
-    removeTarea(id) {
+    eliminarTarea(id) {
+        const index = lista.findIndex(tarea => tarea.id === id);
+
+        if (index !== -1) {
+            lista.splice(index, 1);
+        }else{
+            console.log("No se ha encontrado la tarea");
+        }
     }
 
-    removeAll() {
-    }
-
-    updateTarea(id, descripcion, estado) {
+    updateTarea(id, descripcion,fecha, estado) {
+        let encontrado = false;
+        let pos = this.buscaId(id);
+        if (pos >= 0) {
+            this.lista[pos].descripcion = descripcion;
+            this.lista[pos].fecha = fecha;
+            this.lista[pos].estado = estado;
+            encontrado = true;
+        }
+        return encontrado;
     }
 
     buscaId(id) {
