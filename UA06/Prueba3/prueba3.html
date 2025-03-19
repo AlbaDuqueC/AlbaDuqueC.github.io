@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="body">
+    <div class="container">
+        <h1>Lista de Tareas</h1>
+        <form id="form">
+            <input type="text" id="nombre" class="input" placeholder="Nombre de la tarea" required>
+            <input type="text" id="descripcion" class="input" placeholder="Descripción de la tarea" required>
+            <button type="submit" class="boton">Agregar</button>
+        </form>
+        <ul id="lista"></ul>
+    </div>
+    <script src="Model.js"></script>
+    <script src="View.js"></script>
+    <script src="Controller.js"></script>
+</body>
+</html>

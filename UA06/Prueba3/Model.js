@@ -10,55 +10,45 @@ class TareasModel {
     }
 
     getTarea(id) {
-        let encontrado = false;
-        let resultado = [];
-        encontrado = this.buscaId(id)
-        if (encontrado >= 0)
-            resultado = this.lista[encontrado];
-        return resultado;
+        let encontrado = this.buscaId(id);
+        if (encontrado >= 0) {
+            return this.lista[encontrado];
+        }
+        return null;
     }
 
-    setTarea(descripcion) {
+    setTarea(nombre, descripcion) {
         let obj = {
             id: this.contador++,
+            nombre: nombre,
             descripcion: descripcion,
-            fecha: new Date(),
-            estado: false,
+            fecha: new Date()
         }
         this.lista.push(obj);
     }
 
     eliminarTarea(id) {
-        const index = lista.findIndex(tarea => tarea.id === id);
+        const index = this.lista.findIndex(tarea => tarea.id === id);
 
         if (index !== -1) {
-            lista.splice(index, 1);
-        }else{
+            this.lista.splice(index, 1);
+        } else {
             console.log("No se ha encontrado la tarea");
         }
     }
 
-    updateTarea(id, descripcion,fecha, estado) {
-        let encontrado = false;
+    updateTarea(id, nombre, descripcion, fecha) {
         let pos = this.buscaId(id);
         if (pos >= 0) {
+            this.lista[pos].nombre = nombre;
             this.lista[pos].descripcion = descripcion;
             this.lista[pos].fecha = fecha;
-            this.lista[pos].estado = estado;
-            encontrado = true;
+            return true;
         }
-        return encontrado;
+        return false;
     }
 
     buscaId(id) {
-        let i = -1;
-        let encontrado = false;
-        do {
-            i++;
-            encontrado = (this.lista[i].id === id);
-        } while (!encontrado && i < this.lista.length);
-        if (encontrado)
-            return i;
-        return -1;   // Devuelve la posición encontrada
+        return this.lista.findIndex(tarea => tarea.id === id);
     }
 }
